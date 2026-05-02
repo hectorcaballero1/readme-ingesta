@@ -19,13 +19,13 @@ s3 = boto3.client(
     region_name=os.environ["AWS_REGION"],
 )
 
-HEADERS = {"X-Admin-Key": ADMIN_KEY}
+HEADERS = {"X-API-Key": ADMIN_KEY}
 
 
-def fetch(url, field):
+def fetch(url):
     resp = requests.get(url, headers=HEADERS, timeout=30)
     resp.raise_for_status()
-    return resp.json()[field]
+    return resp.json()
 
 
 def to_csv(records):
@@ -43,16 +43,16 @@ def to_csv(records):
     return buf.getvalue()
 
 
-def ingest(url, field, s3_key):
-    records = fetch(url, field)
+def ingest(url, s3_key):
+    records = fetch(url)
     body = to_csv(records).encode("utf-8")
     s3.put_object(Bucket=ANALYTICS_BUCKET, Key=s3_key, Body=body, ContentType="text/csv")
     print(f"Subido {s3_key}: {len(records)} registros")
 
 
 def main():
-    ingest(f"{MS1_URL}/api/export/users", "users", "ms1/users.csv")
-    ingest(f"{MS1_URL}/api/export/zones", "zones", "ms1/zones.csv")
+    ingest(f"{MS1_URL}/api/export/users", "ms1/users.csv")
+    ingest(f"{MS1_URL}/api/export/zones", "ms1/zones.csv")
 
 
 if __name__ == "__main__":
