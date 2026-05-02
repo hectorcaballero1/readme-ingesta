@@ -31,9 +31,10 @@ def fetch(url):
 def to_csv(records):
     if not records:
         return ""
+    # Unión de todas las claves para cubrir documentos con campos opcionales
+    fieldnames = list(dict.fromkeys(k for row in records for k in row))
     buf = io.StringIO()
-    fieldnames = list(records[0].keys())
-    writer = csv.DictWriter(buf, fieldnames=fieldnames)
+    writer = csv.DictWriter(buf, fieldnames=fieldnames, extrasaction="ignore")
     writer.writeheader()
     for row in records:
         # messages es un array — se serializa como string JSON
