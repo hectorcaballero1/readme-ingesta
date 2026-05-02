@@ -53,7 +53,7 @@ def ingest(url, s3_key):
 
 
 def main():
-    ingest(f"{MS3_URL}/api/export/solicitudes", "ms3/solicitudes.csv")
+    ingest(f"{MS3_URL}/api/export/solicitudes", "ms3/solicitudes/solicitudes.csv")
 
 
 if __name__ == "__main__":

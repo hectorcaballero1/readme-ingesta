@@ -51,8 +51,8 @@ def ingest(url, s3_key):
 
 
 def main():
-    ingest(f"{MS2_URL}/api/export/books", "ms2/books.csv")
-    ingest(f"{MS2_URL}/api/export/categories", "ms2/categories.csv")
+    ingest(f"{MS2_URL}/api/export/books", "ms2/books/books.csv")
+    ingest(f"{MS2_URL}/api/export/categories", "ms2/categories/categories.csv")
 
 
 if __name__ == "__main__":
