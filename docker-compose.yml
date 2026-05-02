@@ -1,0 +1,20 @@
+services:
+  ingesta01:
+    build: ./ingesta01
+    env_file: .env
+    restart: "no"
+
+  ingesta02:
+    build: ./ingesta02
+    env_file: .env
+    restart: "no"
+
+  ingesta03:
+    build: ./ingesta03
+    env_file: .env
+    restart: "no"
+
+  ingesta06:
+    build: ./ingesta06
+    env_file: .env
+    restart: "no"
