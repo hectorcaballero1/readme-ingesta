@@ -37,7 +37,8 @@ def to_csv(records):
     writer.writeheader()
     for row in records:
         writer.writerow({
-            k: json.dumps(v, ensure_ascii=False) if isinstance(v, (list, dict)) else v
+            k: v["id"] if isinstance(v, dict) and "id" in v else
+               json.dumps(v, ensure_ascii=False) if isinstance(v, (list, dict)) else v
             for k, v in row.items()
         })
     return buf.getvalue()
