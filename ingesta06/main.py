@@ -19,7 +19,7 @@ s3 = boto3.client(
     region_name=os.environ["AWS_REGION"],
 )
 
-HEADERS = {"X-Admin-Key": ADMIN_KEY}
+HEADERS = {"X-API-Key": ADMIN_KEY}
 
 
 def fetch(url):
